@@ -21,7 +21,10 @@ const Exercise = () => {
 
 
         <View style={styles.imageContainer}>
-          <View style={styles.rotator}>
+          
+
+
+
             <View style={styles.exerciseBox}>
               <ImageBackground
                 source={require("../assets/image1.webp")}
@@ -31,20 +34,42 @@ const Exercise = () => {
                 <Pressable style={styles.exerciseButton} />
               </ImageBackground>
             </View>
-            <Pressable style={styles.exerciseBox} />
+           { // <Pressable style={styles.exerciseBox} /> 
+           }
 
+       
             <View style={styles.exerciseBox}>
               <ImageBackground
                 source={require("../assets/image2.jpeg")}
                 style={styles.buttonImage}
               >
-                <Text style={styles.imageText}> Arm </Text>
+                <Text style={styles.imageText}> ARM </Text>
                 <Pressable style={styles.exerciseButton} />
               </ImageBackground>
             </View>
-            <Pressable style={styles.exerciseBox} />
+            { // <Pressable style={styles.exerciseBox} /> 
+           }
+         
+         <View style={styles.exerciseBox}>
+              <ImageBackground
+                source={require("../assets/image4.jpeg")}
+                style={styles.buttonImage}
+              >
+                <Text style={styles.imageText}> LEG </Text>
+                <Pressable style={styles.exerciseButton} />
+              </ImageBackground>
+            </View>
+           { // <Pressable style={styles.exerciseBox} /> 
+           }
+
+           
+        
+
+
+
+
           </View>
-        </View>
+      
       </ScrollView>
     </View>
   );
@@ -63,9 +88,11 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "#ECB365",
-    fontSize: 25,
+    fontSize:30,
     fontWeight: "bold",
-    marginTop: 65,
+    marginTop: 70,
+
+  
   },
   
   imageContainer: {
@@ -76,14 +103,14 @@ const styles = StyleSheet.create({
     flexWrap:'wrap'
   },
   exerciseBox: {
-    width: 170,
+    width: 320,
     height: 180,
-    borderRadius: 25,
+    borderRadius: 20,
     overflow: "hidden",
     margin: 10,
   },
   exerciseButton: {
-    width: 170,
+    width: 300,
     height: 180,
   },
   buttonImage: {
@@ -92,10 +119,10 @@ const styles = StyleSheet.create({
   imageText: {
     color: "#FFFFFF",
     fontWeight: "bold",
-    marginLeft: 12,
-    marginTop: 10,
+    marginLeft: 20,
+    marginTop: 20,
     textShadowColor: "white",
-    fontSize: 20,
+    fontSize:30,
     textAlign: "left",
   },
  rotator: {
