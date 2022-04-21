@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import Exercise from "../screens/Exercise";
-import Motivation from "../screens/Motivation";
-import Routine from "../screens/Routine";
-import Profile from "../screens/Profile";
+import Exercise from "./screens/Exercise";
+import Motivation from "./screens/Motivation";
+import Routine from "./screens/Routine";
+import Profile from "./screens/Profile";
 
 const tab = createBottomTabNavigator();
 
