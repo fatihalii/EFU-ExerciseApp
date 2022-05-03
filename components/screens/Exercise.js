@@ -14,62 +14,86 @@ const Exercise = () => {
   return (
     <View style={styles.backgroundContainer}>
       <ScrollView>
-
         <View style={styles.textContainer}>
           <Text style={styles.header}>WORKOUT PROGRAMS</Text>
         </View>
 
-
         <View style={styles.imageContainer}>
-          
 
 
 
-            <View style={styles.exerciseBox}>
+
+
+
+          <View style={styles.exerciseBox}>
+            <Pressable
+              style={({ pressed }) =>
+                pressed
+                  ? [styles.exerciseBox, styles.pressed]
+                  : styles.exerciseBox
+              }
+            >
               <ImageBackground
                 source={require("../../assets/image1.webp")}
                 style={styles.buttonImage}
               >
                 <Text style={styles.imageText}> {imageInnerText}</Text>
-                <Pressable style={styles.exerciseButton} />
               </ImageBackground>
-            </View>
-           { // <Pressable style={styles.exerciseBox} /> 
-           }
+            </Pressable>
+          </View>
 
-       
-            <View style={styles.exerciseBox}>
+          <View style={styles.exerciseBox}>
+            <Pressable
+              style={({ pressed }) =>
+                pressed
+                  ? [styles.exerciseBox, styles.pressed]
+                  : styles.exerciseBox
+              }
+            >
               <ImageBackground
                 source={require("../../assets/image2.jpeg")}
                 style={styles.buttonImage}
               >
                 <Text style={styles.imageText}> ARM </Text>
-                <Pressable style={styles.exerciseButton} />
               </ImageBackground>
-            </View>
-            { // <Pressable style={styles.exerciseBox} /> 
-           }
-         
-         <View style={styles.exerciseBox}>
+            </Pressable>
+          </View>
+
+          <View style={styles.exerciseBox}>
+            <Pressable
+              style={({ pressed }) =>
+                pressed
+                  ? [styles.exerciseBox, styles.pressed]
+                  : styles.exerciseBox
+              }
+            >
               <ImageBackground
                 source={require("../../assets/image4.jpeg")}
                 style={styles.buttonImage}
               >
                 <Text style={styles.imageText}> LEG </Text>
-                <Pressable style={styles.exerciseButton} />
               </ImageBackground>
-            </View>
-           { // <Pressable style={styles.exerciseBox} /> 
-           }
-
-           
-        
-
-
-
-
+            </Pressable>
           </View>
-      
+
+          <View style={styles.exerciseBox}>
+            <Pressable
+              style={({ pressed }) =>
+                pressed
+                  ? [styles.exerciseBox, styles.pressed]
+                  : styles.exerciseBox
+              }
+            >
+              <ImageBackground
+                source={require("../../assets/image3.webp")}
+                style={styles.buttonImage}
+              >
+                <Text style={styles.imageText}> TRICEPS </Text>
+              </ImageBackground>
+            </Pressable>
+          </View>
+        
+        </View>
       </ScrollView>
     </View>
   );
@@ -88,19 +112,17 @@ const styles = StyleSheet.create({
   },
   header: {
     color: "#ECB365",
-    fontSize:30,
+    fontSize: 30,
     fontWeight: "bold",
     marginTop: 70,
-
-  
   },
-  
+
   imageContainer: {
     marginTop: 20,
     justifyContent: "center",
     alignContent: "center",
     flexDirection: "row",
-    flexWrap:'wrap'
+    flexWrap: "wrap",
   },
   exerciseBox: {
     width: 320,
@@ -108,10 +130,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     margin: 10,
-  },
-  exerciseButton: {
-    width: 300,
-    height: 180,
   },
   buttonImage: {
     flex: 1,
@@ -122,13 +140,15 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 20,
     textShadowColor: "white",
-    fontSize:30,
+    fontSize: 30,
     textAlign: "left",
   },
- rotator: {
-   justifyContent:'center',
-   alignItems:'center',
-  flexDirection:'row',
-
- }
+  rotator: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  pressed: {
+    opacity: 0.75,
+  },
 });

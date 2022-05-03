@@ -7,7 +7,9 @@ const Profile = () => {
 
       <Image
         style={styles.avatar}
-        source={{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }}
+        source={//{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }
+          require("../../assets/profile-icon-9.png")
+        }
       />
       <Text
         style={{
@@ -25,10 +27,10 @@ const Profile = () => {
             <Text>My Profile </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>
-            <Text>My Favorite </Text>
+            <Text>Favorites </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>
-            <Text>Feedback</Text>
+            <Text>Help</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>
             <Text>Settings</Text>
@@ -50,12 +52,13 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 63,
-    borderWidth: 4,
+    borderWidth: 3,
     borderColor: "black",
     marginBottom: 20,
     alignSelf: "center",
     position: "absolute",
     marginTop: 90,
+    backgroundColor:'#FFFFFF'
   },
   body: {
     marginTop: 10,
