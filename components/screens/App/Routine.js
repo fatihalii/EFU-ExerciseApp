@@ -19,7 +19,7 @@ const Routine = () => {
         flex:1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#06223d'
+        backgroundColor:'#041C32'
         
       }
     });

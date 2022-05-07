@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 const Profile = () => {
   return (
     <View style={{ backgroundColor: "#06223d" }}>
-      <View style={styles.header}></View>
+      <View style={styles.header}>
+        
+      </View>
 
       <Image
         style={styles.avatar}
-        source={//{ uri: "https://bootdey.com/img/Content/avatar/avatar6.png" }
-          require("../../assets/profile-icon-9.png")
-        }
+        source={require("../../../assets/profile-icon-9.png")}
       />
       <Text
         style={{
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     position: "absolute",
     marginTop: 90,
-    backgroundColor:'#FFFFFF'
+    backgroundColor: "#FFFFFF",
   },
   body: {
     marginTop: 10,
