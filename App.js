@@ -6,27 +6,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Navbar from "./components/screens/App/Navbar";
 import Home from "./components/screens/Login/Home";
 
-
 export default function App() {
-
   const Stack = createNativeStackNavigator();
-  
+
   return (
     <>
       <StatusBar style="light" />
       <NavigationContainer>
-        {/* <Navbar /> */}
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen 
-          name="Home"
-          component={Home}
-          options={{
-           headerShown:false
-          }}
-          />
-          
+        <Stack.Navigator>
+          <Stack.Screen name="HomePage" component={Home} options={{headerShown:false}} />
+          <Stack.Screen name="AppPage" component={Navbar} options={{headerShown:false}}  />
         </Stack.Navigator>
-        
       </NavigationContainer>
     </>
   );
