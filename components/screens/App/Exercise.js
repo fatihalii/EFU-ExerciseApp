@@ -1,6 +1,7 @@
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import ExerciseButton from "../../ExerciseButton.js";
 import { NavigationContainer } from "@react-navigation/native";
+import Colors from "../../../constants/Colors.js";
 
 const Exercise = () => {
   const imageInnerText = `FULL
@@ -41,14 +42,14 @@ export default Exercise;
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#06223d",
+    backgroundColor: Colors.primary200,
   },
   textContainer: {
     justifyContent: "center",
     alignItems: "center",
   },
   header: {
-    color: "#ECB365",
+    color: Colors.secondary100,
     fontSize: 30,
     fontWeight: "bold",
     marginTop: 70,

@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import MapView from "react-native-maps";
+import Colors from "../../../constants/Colors.js";
 
 const images = [
   "https://imgyukle.com/f/2022/04/17/RuThDM.png",
@@ -21,7 +22,7 @@ const height = width;
 
 const Motivation = () => {
   return (
-    <View style={{ backgroundColor: "#06223d", flex: 1 }}>
+    <View style={{ backgroundColor: Colors.primary200, flex: 1 }}>
       <ScrollView>
         <View style={styles.viewContainer}>
           <View style={styles.container}>
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#06223d",
+    backgroundColor: Colors.primary200,
   },
 
   container: {

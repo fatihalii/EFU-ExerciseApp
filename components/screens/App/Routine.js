@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import Colors from "../../../constants/Colors.js";
 
 
 
@@ -19,7 +20,7 @@ const Routine = () => {
         flex:1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#041C32'
+        backgroundColor:Colors.primary200
         
       }
     });

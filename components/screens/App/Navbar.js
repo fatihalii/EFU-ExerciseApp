@@ -5,6 +5,7 @@ import Exercise from "./Exercise";
 import Motivation from "./Motivation";
 import Routine from "./Routine";
 import Profile from "./Profile";
+import Colors from "../../../constants/Colors.js";
 
 const tab = createBottomTabNavigator();
 
@@ -13,9 +14,9 @@ const Navbar = () => {
     <tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#ECB365",
+        tabBarActiveTintColor: Colors.secondary100,
         tabBarInactiveTintColor:'#FFFFFF',
-        tabBarStyle: { backgroundColor: "#041C32", borderTopColor: "#FFFFFF" },
+        tabBarStyle: { backgroundColor: Colors.primary100, borderTopColor: "#FFFFFF" },
         
       }}
     >

@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import Colors from "../../../constants/Colors.js";
 
 const Profile = () => {
   return (
-    <View style={{ backgroundColor: "#06223d" }}>
+    <View style={{ backgroundColor: Colors.primary200 }}>
       <View style={styles.header}>
         
       </View>
@@ -45,7 +46,7 @@ export default Profile;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#06223d",
+    backgroundColor: Colors.primary200,
     height: 200,
   },
   avatar: {
