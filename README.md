@@ -1,2 +1,2 @@
-# This is a Graduation Project been made by 3 people
+# This is a Graduation Project on progress by 3 people
 
