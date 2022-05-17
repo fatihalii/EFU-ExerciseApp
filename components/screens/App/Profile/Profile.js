@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import Colors from "../../../constants/Colors.js";
+import Colors from "../../../../constants/Colors.js";
 
 const Profile = () => {
   return (
@@ -10,7 +10,7 @@ const Profile = () => {
 
       <Image
         style={styles.avatar}
-        source={require("../../../assets/profile-icon-9.png")}
+        source={require("../../../../assets/profile-icon-9.png")}
       />
       <Text
         style={{
@@ -24,7 +24,8 @@ const Profile = () => {
       </Text>
       <View style={styles.body}>
         <View style={styles.bodyContent}>
-          <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer}
+          >
             <Text>My Profile </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonContainer}>

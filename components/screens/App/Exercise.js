@@ -1,6 +1,5 @@
 import { View, StyleSheet, ScrollView, Text } from "react-native";
 import ExerciseButton from "../../ExerciseButton.js";
-import { NavigationContainer } from "@react-navigation/native";
 import Colors from "../../../constants/Colors.js";
 
 const Exercise = () => {

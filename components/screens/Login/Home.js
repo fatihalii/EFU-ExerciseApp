@@ -33,19 +33,22 @@ const Home = ({ navigation }) => {
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
+          onPress={() => navigation.navigate("AppPage")}
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </Pressable>
       </View>
-      
-         <Pressable style={({ pressed }) =>
-            pressed ? [styles.registerContainer, styles.buttonPressed] : styles.registerContainer
-          } 
-          onPress={()=>navigation.navigate('RegisterPage')}
-          >
-          <Text style={styles.registerText} >Don't have an account?</Text>
-        </Pressable> 
 
+      <Pressable
+        style={({ pressed }) =>
+          pressed
+            ? [styles.registerContainer, styles.buttonPressed]
+            : styles.registerContainer
+        }
+        onPress={() => navigation.navigate("RegisterPage")}
+      >
+        <Text style={styles.registerText}>Don't have an account?</Text>
+      </Pressable>
     </View>
   );
 };
@@ -97,13 +100,12 @@ const styles = StyleSheet.create({
   buttonPressed: {
     opacity: 0.75,
   },
-  registerContainer:{
-    alignItems:'center',
-    justifyContent:'center',
+  registerContainer: {
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 40,
   },
   registerText: {
     color: "#FFFFFF",
-  
   },
 });

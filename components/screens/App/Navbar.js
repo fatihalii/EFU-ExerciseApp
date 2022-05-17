@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Exercise from "./Exercise";
 import Motivation from "./Motivation";
 import Routine from "./Routine";
-import Profile from "./Profile";
+import Profile from "./Profile/Profile";
 import Colors from "../../../constants/Colors.js";
 
 const tab = createBottomTabNavigator();
