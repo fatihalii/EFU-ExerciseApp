@@ -1,6 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 import Colors from "../../../constants/Colors.js";
+import { getAuth } from "firebase/auth";
 
+const auth = getAuth();
+const user = auth.currentUser;
 
 
 const Routine = () => {
@@ -8,6 +11,8 @@ const Routine = () => {
   
       <View style={styles.viewContainer}>
         <Text>Routine PAGE</Text>
+        <Text>{user?.displayName}</Text>
+        <Text>{user?.email}</Text>
       </View>
   
     );

@@ -9,7 +9,8 @@ import Colors from "../../../constants/Colors";
 
 const tab = createBottomTabNavigator();
 
-const Navbar = () => {
+const Navbar = (route) => {
+  console.log(route.params.user.email)
   return (
     <tab.Navigator
       screenOptions={{

@@ -6,10 +6,41 @@ import {
   Image,
   TextInput,
 } from "react-native";
-
+import { useState, useEffect } from "react";
 import Colors from "../../../constants/Colors";
 
+import {initializeApp} from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {app, auth} from '../../firebase';
+
 const Home = ({ navigation }) => {
+
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigation = navigation();
+
+  onAuthStateChanged(auth, (user) => {
+    if(user) {
+      const uid = user.uid;
+      navigation.navigate('RoutinePage');
+    } } );
+   const onPressLogin = async () => {
+
+     try {
+       const response = 
+       await signInWithEmailAndPassword(auth, email, password);
+       const user = response.user;
+       navigation.navigate('RoutinePage');     
+      } catch (error) {
+        console.error(error);
+        alert(error.message);
+      } 
+    }
+    
+  
+
   return (
     <View style={styles.main}>
       <Image
@@ -18,22 +49,30 @@ const Home = ({ navigation }) => {
       />
       <View style={styles.inputContainer}>
         <TextInput
+          value={email}
           style={styles.textInput}
           placeholder={"E-Mail"}
           placeholderTextColor={"#FFFFFF"}
           textAlign={"center"}
+          autoCapitalize={"none"}
+          autoCorrect={false}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
+          value={password}
           style={styles.textInput}
           placeholder={"Password"}
           placeholderTextColor={"#FFFFFF"}
           textAlign={"center"}
+          autoCapitalize={"none"}
+          secureTextEntry={true}
+          onChangeText={(text) => setPassword(text)}
         />
         <Pressable
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
-          onPress={() => navigation.navigate("AppPage")}
+          onPress={() => onPressLogin()}
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </Pressable>
@@ -45,7 +84,7 @@ const Home = ({ navigation }) => {
             ? [styles.registerContainer, styles.buttonPressed]
             : styles.registerContainer
         }
-        onPress={() => navigation.navigate("RegisterPage")}
+        onPress={ () => navigation.navigate('RegisterPage') }
       >
         <Text style={styles.registerText}>Don't have an account?</Text>
       </Pressable>

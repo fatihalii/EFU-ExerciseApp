@@ -58,14 +58,14 @@ const Profile = () => {
         <Pressable style={styles.seperator}>
           <View style={styles.button}>
             <TouchableOpacity>
-              <Text style={styles.textStyle}>Delete Profile</Text>
+              <Text style={styles.textStyle}>Sign-Out</Text>
             </TouchableOpacity>
           </View>
         </Pressable>
         <Pressable style={styles.seperator}>
           <View style={styles.button}>
             <TouchableOpacity>
-              <Text style={styles.textStyle}>Some Menu</Text>
+              <Text style={styles.textStyle}>Delete Profile</Text>
             </TouchableOpacity>
           </View>
         </Pressable>

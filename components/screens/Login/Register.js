@@ -1,57 +1,59 @@
-import { Text, StyleSheet, Pressable, View, TextInput } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Pressable,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { useState } from "react";
 import Colors from "../../../constants/Colors";
 
-import { initializeApp } from 'firebase/app';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
-import { async } from "@firebase/util";
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, setDoc, doc } from 'firebase/firestore'
+import {auth} from '../../firebase'
 
 
 //import {getFirestore, collection, getDocs} from 'firebase/firestore/lite'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-
 const Register = ({ navigation }) => {
+  
+  
+ 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAC75qsTHieOVIKQttMSp4K2EkLGoLEfcs",
-  authDomain: "efu-app-12.firebaseapp.com",
-  projectId: "efu-app-12",
-  storageBucket: "efu-app-12.appspot.com",
-  messagingSenderId: "923078699530",
-  appId: "1:923078699530:web:f776464f03b3e960294df3"
-};
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-  const [user, setUser] = useState({
-    email: "",
-    password: ""
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [userCredentials, setUserCredentials] = useState({
     name: "",
-    age: "",
+    BirthOfDate:"",
     height: "",
     weight: "",
     gender: "",
   });
 
+  const createUser = async (email, password) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((response) => {
+          const user = response.user;
+          
+          console.log("Successfull");
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  };
 
-  const createUser = () => createUserWithEmailAndPassword(auth, user.email, user.password)
-  .then((userCredential)=>{
-    const user = userCredential.user;
-    console.log("Successfull")
-  })
-  .catch((error)=>{
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  })
 
-
+  
   return (
     <View style={styles.pageContainer}>
       <Text style={styles.headerText}>Create account</Text>
@@ -65,25 +67,30 @@ const auth = getAuth(app);
         <TextInput
           style={styles.nameInput}
           placeholder="E-mail"
-          
+          autoCapitalize="none"
           placeholderTextColor={Colors.secondary100}
-          onChangeText={eml=>{setUser({...user, email:eml})}}
+          Value={email}
+          onChangeText={(text) => {
+            setEmail(toString(text));
+          }}
           textAlign={"center"}
         />
         <TextInput
           style={styles.nameInput}
           placeholder="Password"
+          autoCapitalize="none"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
-          onChangetext={pw=>{setUser({...user, password:pw})}}
-          secureTextEntry={"true"}
+          defaultValue={password}
+          onChangetext={(text) => {
+            setPassword(toString(text));
+          }}
         />
         <TextInput
           style={styles.nameInput}
           placeholder="Confirm Password"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
-          secureTextEntry={"true"}
         />
         <TextInput
           style={styles.smallInput}
@@ -112,7 +119,7 @@ const auth = getAuth(app);
         />
       </View>
 
-      <Pressable style={styles.button} onPress={createUser} >
+      <Pressable style={styles.button} onPress={() => createUser()}>
         <Text style={styles.buttonText}>Register</Text>
       </Pressable>
     </View>

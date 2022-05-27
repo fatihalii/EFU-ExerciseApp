@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Navbar from "./components/screens/App/Navbar";
 import Home from "./components/screens/Login/Home";
 import Register from "./components/screens/Login/Register";
+import Routine from "./components/screens/App/Routine";
 import Colors from "./constants/Colors";
 
 
@@ -28,6 +29,7 @@ export default function App() {
           }
           
           }  />
+          <Stack.Screen name="RoutinePage" component={Routine} options={{headerShown:false}} />
           
         </Stack.Navigator>
       </NavigationContainer>
