@@ -27,9 +27,7 @@ export default function App() {
           headerTintColor:Colors.secondary100,
           title:'',
           }
-          
           }  />
-          <Stack.Screen name="RoutinePage" component={Routine} options={{headerShown:false}} />
           
         </Stack.Navigator>
       </NavigationContainer>

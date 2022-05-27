@@ -9,51 +9,37 @@ import {
 import { useState } from "react";
 import Colors from "../../../constants/Colors";
 
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, setDoc, doc } from 'firebase/firestore'
-import {auth} from '../../firebase'
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+//import { getFirestore, setDoc, doc } from "firebase/firestore";
+ import {auth} from '../../firebase'
 
 //import {getFirestore, collection, getDocs} from 'firebase/firestore/lite'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const Register = ({ navigation }) => {
-  
-  
- 
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [userCredentials, setUserCredentials] = useState({
     name: "",
-    BirthOfDate:"",
+    BirthOfDate: "",
     height: "",
     weight: "",
     gender: "",
   });
 
-  const createUser = async (email, password) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((response) => {
-          const user = response.user;
-          
-          console.log("Successfull");
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    } catch (error) {
-      console.error(error);
-      alert(error.message);
-    }
+  const createUser = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        const user = response.user;
+        console.log("Successfull");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
-
-  
   return (
     <View style={styles.pageContainer}>
       <Text style={styles.headerText}>Create account</Text>
@@ -71,7 +57,7 @@ const Register = ({ navigation }) => {
           placeholderTextColor={Colors.secondary100}
           Value={email}
           onChangeText={(text) => {
-            setEmail(toString(text));
+            setEmail(text);
           }}
           textAlign={"center"}
         />
@@ -83,7 +69,7 @@ const Register = ({ navigation }) => {
           textAlign={"center"}
           defaultValue={password}
           onChangetext={(text) => {
-            setPassword(toString(text));
+            setPassword(text);
           }}
         />
         <TextInput
@@ -119,7 +105,7 @@ const Register = ({ navigation }) => {
         />
       </View>
 
-      <Pressable style={styles.button} onPress={() => createUser()}>
+      <Pressable style={styles.button} onPress={createUser}>
         <Text style={styles.buttonText}>Register</Text>
       </Pressable>
     </View>

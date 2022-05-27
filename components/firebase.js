@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApp, getApps } from "firebase/app";
 //import 'firebase/auth';
 import { getAuth } from "firebase/auth";
 
@@ -12,8 +12,9 @@ const firebaseConfig = {
     appId: "1:923078699530:web:f776464f03b3e960294df3",
   };
 
+  const app = getApps().length === 0 ?  initializeApp(firebaseConfig) : getApp();
   
-  const app = initializeApp(firebaseConfig);
+  
   const auth = getAuth(app);
 
 

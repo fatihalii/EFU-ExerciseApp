@@ -9,38 +9,38 @@ import {
 import { useState, useEffect } from "react";
 import Colors from "../../../constants/Colors";
 
-import {initializeApp} from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import {app, auth} from '../../firebase';
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../firebase';
 
 const Home = ({ navigation }) => {
-
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigation = navigation();
 
-  onAuthStateChanged(auth, (user) => {
-    if(user) {
-      const uid = user.uid;
-      navigation.navigate('RoutinePage');
-    } } );
-   const onPressLogin = async () => {
+  // onAuthStateChanged(auth, (user) => {
+  //   if(user) {
+  //     const uid = user.uid;
+  //     navigation.navigate('RoutinePage');
+  //   } } );
+   const onPressLogin = () => {
 
-     try {
-       const response = 
-       await signInWithEmailAndPassword(auth, email, password);
-       const user = response.user;
-       navigation.navigate('RoutinePage');     
-      } catch (error) {
-        console.error(error);
-        alert(error.message);
-      } 
-    }
+       signInWithEmailAndPassword(auth, email, password)
+       .then((response) => {const user = response.user
+      console.log("successful")
+      })
+       .catch((error)=>{
+         const errorCode = error.code;
+         const errorMessage = error.message;
+         console.log(errorCode);
+         console.log(errorMessage);
+       }) 
+      }
     
-  
+      
 
+
+    
   return (
     <View style={styles.main}>
       <Image
@@ -72,7 +72,7 @@ const Home = ({ navigation }) => {
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
-          onPress={() => onPressLogin()}
+          onPress={onPressLogin}
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </Pressable>

@@ -9,8 +9,8 @@ import Colors from "../../../constants/Colors";
 
 const tab = createBottomTabNavigator();
 
-const Navbar = (route) => {
-  console.log(route.params.user.email)
+const Navbar = () => {
+
   return (
     <tab.Navigator
       screenOptions={{
@@ -21,7 +21,7 @@ const Navbar = (route) => {
         
       }}
     >
-      <tab.Screen
+      {/* <tab.Screen
         name="Motivation"
         component={Motivation}
         options={{
@@ -36,7 +36,7 @@ const Navbar = (route) => {
             />
           ),
         }}
-      />
+      /> */}
       <tab.Screen
         name="Exercise"
         component={Exercise}
