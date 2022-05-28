@@ -11,12 +11,23 @@ import Colors from "../../../constants/Colors";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../firebase';
+import { useNavigation } from "@react-navigation/native";
 
-const Home = ({ navigation }) => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Home = () => {
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigation = useNavigation();
+  
+
+    onAuthStateChanged((auth),user => {
+    if(user){
+      navigation.navigate('AppPage');
+    }
+  })
+  
 
   // onAuthStateChanged(auth, (user) => {
   //   if(user) {
@@ -26,7 +37,9 @@ const Home = ({ navigation }) => {
    const onPressLogin = () => {
 
        signInWithEmailAndPassword(auth, email, password)
-       .then((response) => {const user = response.user
+       .then((response) => {
+         const user = response.user
+         navigation.navigate()
       console.log("successful")
       })
        .catch((error)=>{
