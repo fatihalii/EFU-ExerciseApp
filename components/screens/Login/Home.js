@@ -10,50 +10,39 @@ import { useState, useEffect } from "react";
 import Colors from "../../../constants/Colors";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../firebase';
+import { auth } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 
-
 const Home = () => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
-  
 
-    onAuthStateChanged((auth),user => {
-    if(user){
-      navigation.navigate('AppPage');
-    }
-  })
-  
-
-  // onAuthStateChanged(auth, (user) => {
-  //   if(user) {
-  //     const uid = user.uid;
-  //     navigation.navigate('RoutinePage');
-  //   } } );
-   const onPressLogin = () => {
-
-       signInWithEmailAndPassword(auth, email, password)
-       .then((response) => {
-         const user = response.user
-         navigation.navigate()
-      console.log("successful")
-      })
-       .catch((error)=>{
-         const errorCode = error.code;
-         const errorMessage = error.message;
-         console.log(errorCode);
-         console.log(errorMessage);
-       }) 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigation.navigate("AppPage");
       }
-    
-      
+    });
+    return unsubscribe;
+  }, []);
+  
+  const onPressLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        const user = response.user;
+        navigation.navigate();
+        console.log("successful");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
 
-
-    
   return (
     <View style={styles.main}>
       <Image
@@ -85,7 +74,7 @@ const Home = () => {
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
-          onPress={onPressLogin}
+          onPress={() => navigation.navigate("AppPage")}
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </Pressable>
@@ -97,7 +86,7 @@ const Home = () => {
             ? [styles.registerContainer, styles.buttonPressed]
             : styles.registerContainer
         }
-        onPress={ () => navigation.navigate('RegisterPage') }
+        onPress={() => navigation.navigate("RegisterPage")}
       >
         <Text style={styles.registerText}>Don't have an account?</Text>
       </Pressable>

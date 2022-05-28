@@ -10,7 +10,6 @@ const Routine = () => {
     return (
       <View style={styles.viewContainer}>
         <Text>Routine PAGE</Text>
-        <Text>{user?.displayName}</Text>
         <Text>{user?.email}</Text>
       </View>
   

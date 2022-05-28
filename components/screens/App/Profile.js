@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Colors from "../../../constants/Colors.js";
 
@@ -33,42 +33,109 @@ const Profile = () => {
         </ImageBackground>
       </View>
       <View style={styles.contentContainer}>
-        <View style={styles.seperatorTop}></View>
-        <Pressable style={styles.seperator}>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text style={styles.textStyle}>My Stats</Text>
-            </TouchableOpacity>
+        <View style={styles.stickTop}>
+          <View style={styles.seperatorTop}></View>
+          <View style={styles.seperator}>
+            <View style={styles.button}>
+              <TouchableOpacity>
+                <View style={styles.layoutRowNew}>
+                  <MaterialCommunityIcons
+                    name="chart-donut"
+                    color="#FFF"
+                    size="40"
+                  />
+                  <Text style={styles.textStyle}>My Stats</Text>
+                  <MaterialCommunityIcons
+                    name="menu-right"
+                    color="#FFF"
+                    size="40"
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </Pressable>
-        <Pressable style={styles.seperator}>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text style={styles.textStyle}>History</Text>
-            </TouchableOpacity>
+          <View style={styles.seperator}>
+            <View style={styles.button}>
+              <TouchableOpacity>
+                <View style={styles.layoutRowNew}>
+                  <MaterialCommunityIcons
+                    name="history"
+                    color="#FFF"
+                    size="40"
+                  />
+                  <Text style={styles.textStyle}>History</Text>
+                  <MaterialCommunityIcons
+                    name="menu-right"
+                    color="#FFF"
+                    size="40"
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </Pressable>
-        <Pressable style={styles.seperator}>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text style={styles.textStyle}>Account Settings</Text>
-            </TouchableOpacity>
+          <View style={styles.seperator}>
+            <View style={styles.button}>
+              <TouchableOpacity>
+                <View style={styles.layoutRowNew}>
+                  <MaterialCommunityIcons
+                    name="home-account"
+                    color="#FFF"
+                    size="40"
+                  />
+                  <Text style={styles.textStyle}>Account Settings</Text>
+                  <MaterialCommunityIcons
+                    name="menu-right"
+                    color="#FFF"
+                    size="40"
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </Pressable>
-        <Pressable style={styles.seperator}>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text style={styles.textStyle}>Sign-Out</Text>
-            </TouchableOpacity>
+        </View>
+        <View style={styles.stickBottom}>
+          <View style={styles.seperator}></View>
+          <View style={styles.seperator}>
+            <View style={styles.button}>
+              <TouchableOpacity>
+                <View style={styles.layoutRowNew}>
+                  <MaterialCommunityIcons
+                    name="account-off-outline"
+                    color="#FFF"
+                    size="40"
+                  />
+                  <Text style={styles.textStyle}>Sign Out</Text>
+                  <MaterialCommunityIcons
+                    name="menu-right"
+                    color="#FFF"
+                    size="40"
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </Pressable>
-        <Pressable style={styles.seperator}>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text style={styles.textStyle}>Delete Profile</Text>
-            </TouchableOpacity>
+          <View style={styles.seperator}>
+            <View style={styles.button}>
+              <TouchableOpacity>
+                <View style={{ textAlign: "center" }}>
+                  {/* <MaterialCommunityIcons
+                    name="account-cancel"
+                    color="#E34C4E"
+                    size="40"
+                  /> */}
+                  <Text style={[styles.textStyleDelete, { color: "#E34C4E" }]}>
+                    Delete Account
+                  </Text>
+                  {/* <MaterialCommunityIcons
+                    name="menu-right"
+                    color="#E34C4E"
+                    size="40"
+                  /> */}
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-        </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -114,7 +181,7 @@ const styles = StyleSheet.create({
     fontFamily: "PingFang TC",
     fontSize: 35,
     marginTop: "65%",
-    marginLeft:10,
+    marginLeft: 10,
     shadowColor: "#000",
     shadowOffset: { width: 4, height: 2 },
     shadowOpacity: 0.7,
@@ -132,6 +199,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 2,
+    flexDirection: "column",
   },
   buttonContainer: {
     marginTop: 40,
@@ -159,20 +227,21 @@ const styles = StyleSheet.create({
   seperator: {
     width: "100%",
     height: 60,
-    borderBottomColor: "#607D8B",
-    borderBottomWidth: 1.3,
+    borderBottomColor: "#FFF",
+    borderBottomWidth: 0.5,
   },
   seperatorTop: {
     width: "100%",
     height: 60,
-    borderBottomColor: "#607D8B",
-    borderBottomWidth: 1.3,
+    borderBottomColor: "#FFF",
+    borderBottomWidth: 0.5,
   },
   textStyle: {
+    alignSelf: "center",
     textAlign: "center",
     color: "#FFFFFF",
     fontFamily: "PingFang TC",
-    fontSize: 25,
+    fontSize: 27,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
@@ -181,5 +250,23 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
+  },
+  layoutRowNew: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  stickBottom: {
+    paddingTop: 35,
+  },
+  stickTop: {
+    paddingTop: 5,
+  },
+  textStyleDelete: {
+    alignSelf: "center",
+    textAlign: "center",
+    fontFamily: "PingFang TC",
+    fontSize: 25,
+    fontWeight: "bold",
   },
 });
