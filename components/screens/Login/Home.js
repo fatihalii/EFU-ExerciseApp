@@ -32,12 +32,13 @@ const Home = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         const user = response.user;
-        navigation.navigate();
+        navigation.navigate("AppPage");
         console.log("successful");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(errorMessage);
         console.log(errorCode);
         console.log(errorMessage);
       });
@@ -74,7 +75,7 @@ const Home = () => {
           style={({ pressed }) =>
             pressed ? [styles.button, styles.buttonPressed] : styles.button
           }
-          onPress={() => navigation.navigate("AppPage")}
+          onPress={() => onPressLogin() }
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </Pressable>

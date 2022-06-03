@@ -6,12 +6,60 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-
+import { useState, useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 import Colors from "../../../constants/Colors.js";
+import { auth, db } from "../../firebase.js";
+import { deleteUser, signOut } from "firebase/auth";
+import { useNavigation } from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+
 
 const Profile = () => {
+  const user = auth.currentUser;
+  const navigation = useNavigation();
+
+  const [name, setName] = useState("");
+
+  const exit = () => {
+    signOut(auth)
+      .then(() => {
+        alert("Signed out");
+        navigation.navigate("HomePage");
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error);
+      });
+  };
+
+  const eraseUser = () => {
+    deleteUser(user)
+      .then(() => {
+        alert("You have successfully deleted your account.");
+        navigation.navigate("HomePage");
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error);
+      });
+  };
+
+  const getName = () => {
+    getDoc(doc(db, "users", user?.uid))
+      .then((response) => {
+        const result = response.get("name");
+        setName(result);
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getName();
+  }, []);
+
   return (
     <View style={styles.viewContainer}>
       <View style={styles.coverPhoto}>
@@ -27,7 +75,7 @@ const Profile = () => {
               />
             </View>
             <View style={styles.infoContainer}>
-              <Text style={styles.usernameContainer}>Marc Spector</Text>
+              <Text style={styles.usernameContainer}>{name}</Text>
             </View>
           </View>
         </ImageBackground>
@@ -97,7 +145,7 @@ const Profile = () => {
           <View style={styles.seperator}></View>
           <View style={styles.seperator}>
             <View style={styles.button}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => exit()}>
                 <View style={styles.layoutRowNew}>
                   <MaterialCommunityIcons
                     name="account-off-outline"
@@ -116,7 +164,7 @@ const Profile = () => {
           </View>
           <View style={styles.seperator}>
             <View style={styles.button}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => eraseUser()}>
                 <View style={{ textAlign: "center" }}>
                   {/* <MaterialCommunityIcons
                     name="account-cancel"

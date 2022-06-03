@@ -10,35 +10,61 @@ import { useState } from "react";
 import Colors from "../../../constants/Colors";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, setDoc, doc } from 'firebase/firestore';
 //import { getFirestore, setDoc, doc } from "firebase/firestore";
- import {auth} from '../../firebase'
+import { auth,db } from "../../firebase";
+import { useNavigation } from "@react-navigation/native";
+import { async } from "@firebase/util";
 
 //import {getFirestore, collection, getDocs} from 'firebase/firestore/lite'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const Register = ({ navigation }) => {
+const Register = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [pw, setPw] = useState("");
 
   const [userCredentials, setUserCredentials] = useState({
-    name: "",
+    Name: "",
     BirthOfDate: "",
-    height: "",
-    weight: "",
-    gender: "",
+    Height: "",
+    Weight: "",
+    Gender: "",
   });
 
-  const createUser = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+  const navigation = useNavigation();
+
+  const createUser =  () => {
+    createUserWithEmailAndPassword(auth, email, pw)
       .then((response) => {
         const user = response.user;
-        console.log("Successfull");
+        try{
+          const docRef =setDoc(doc(db,'users',user.uid),userCredentials);
+          console.log("success")
+          navigation.navigate("AppPage");
+        }catch(error){
+          alert(error.message);
+          console.log(error.message);
+        }
+        
+       
       })
       .catch((error) => {
         alert(error.message);
+        console.log(error.message)
+        console.log(error);
       });
   };
+
+const userMaker= async (identity)=>{
+  try{
+    const docRef = await setDoc(doc(db,'users',identity),pw);
+  }catch(error){
+    alert(error.message);
+    console.log(error.message);
+  }
+
+}
 
   return (
     <View style={styles.pageContainer}>
@@ -49,63 +75,94 @@ const Register = ({ navigation }) => {
           placeholder="Full Name"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
+          autoCorrect="false"
+          value={userCredentials.Name}
+          onChangeText={(text) => {
+            setUserCredentials({...userCredentials,name:text})
+          }}
         />
         <TextInput
           style={styles.nameInput}
           placeholder="E-mail"
           autoCapitalize="none"
+          autoCorrect="false"
           placeholderTextColor={Colors.secondary100}
           Value={email}
           onChangeText={(text) => {
-            setEmail(text);
+            setEmail(text)
           }}
           textAlign={"center"}
+          keyboardType="email-address"
         />
         <TextInput
           style={styles.nameInput}
           placeholder="Password"
           autoCapitalize="none"
+          autoCorrect="false"
           placeholderTextColor={Colors.secondary100}
-          textAlign={"center"}
-          defaultValue={password}
-          onChangetext={(text) => {
-            setPassword(text);
+          Value={pw}
+          onChangeText={(text) => {
+            setPw(text)
           }}
+          textAlign={"center"}
+          secureTextEntry="true"
         />
+       
         <TextInput
           style={styles.nameInput}
           placeholder="Confirm Password"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
+          autoCorrect="false"
+          secureTextEntry="true"
         />
         <TextInput
           style={styles.smallInput}
-          placeholder="Age"
+          placeholder="Birth of Date"
           keyboardType="number-pad"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
+          value={userCredentials.BirthOfDate}
+          onChangeText={(text) => {
+            setUserCredentials({...userCredentials,BirthOfDate:text})
+          }}
         />
         <TextInput
           style={styles.smallInput}
           placeholder="Height"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
+          value={userCredentials.Height}
+          onChangeText={(text) => {
+            setUserCredentials({...userCredentials,height:text})
+          }}
+          keyboardType="numeric"
         />
         <TextInput
           style={styles.smallInput}
           placeholder="Weight"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
+          value={userCredentials.Weight}
+          onChangeText={(text) => {
+            setUserCredentials({...userCredentials,weight:text})
+          }}
+          keyboardType="numeric"
         />
         <TextInput
           style={styles.smallInput}
           placeholder="Gender"
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
+          value={userCredentials.Gender}
+          onChangeText={(text) => {
+            setUserCredentials({...userCredentials,gender:text})
+          }}
+
         />
       </View>
 
-      <Pressable style={styles.button} onPress={createUser}>
+      <Pressable style={styles.button} onPress={() => createUser()}>
         <Text style={styles.buttonText}>Register</Text>
       </Pressable>
     </View>
