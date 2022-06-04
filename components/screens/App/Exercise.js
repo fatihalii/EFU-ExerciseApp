@@ -2,7 +2,9 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import ExerciseButton from "../../ExerciseButton.js";
 import Colors from "../../../constants/Colors.js";
 
+
 const Exercise = () => {
+
   const imageInnerText = `FULL
     BODY`;
 
@@ -17,18 +19,22 @@ const Exercise = () => {
           <ExerciseButton
             Text={imageInnerText}
             Source={require("../../../assets/image1.webp")}
+            ExercisePage ={"Fullbody"}
           />
           <ExerciseButton
             Text={"ARM"}
             Source={require("../../../assets/image2.jpeg")}
+            ExercisePage ={"Arm"}
           />
           <ExerciseButton
             Text={"TRICEPS"}
             Source={require("../../../assets/image3.webp")}
+            ExercisePage ={"Triceps"}
           />
           <ExerciseButton
             Text={"LEGS"}
             Source={require("../../../assets/image4.jpeg")}
+            ExercisePage ={"Legs"}
           />
         </View>
       </ScrollView>

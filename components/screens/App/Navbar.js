@@ -16,7 +16,7 @@ const Navbar = () => {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: Colors.secondary100,
-        tabBarInactiveTintColor:'#FFFFFF',
+        tabBarInactiveTintColor:Colors.secondary200,
         tabBarStyle: { backgroundColor: Colors.primary100, borderTopColor: "#FFFFFF" },
         
       }}

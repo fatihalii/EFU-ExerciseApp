@@ -5,14 +5,17 @@ import {
   ImageBackground,
   StyleSheet,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const ExerciseButton = (props) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.exerciseBox}>
       <Pressable
         style={({ pressed }) =>
           pressed ? [styles.exerciseBox, styles.pressed] : styles.exerciseBox
         }
+        onPress = {()=>navigation.navigate(props.ExercisePage)}
       >
         <ImageBackground source={props.Source} style={styles.buttonImage}>
           <Text style={styles.imageText}>{props.Text}</Text>
