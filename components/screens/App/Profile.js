@@ -15,11 +15,27 @@ import { useNavigation } from "@react-navigation/native";
 import { doc, getDoc } from "firebase/firestore";
 
 
+
 const Profile = () => {
   const user = auth.currentUser;
   const navigation = useNavigation();
 
   const [name, setName] = useState("");
+
+  const getName = () => {
+    getDoc(doc(db, "users", user?.uid))
+      .then((response) => {
+        const result = response.get("Name");
+        setName(result);
+      })
+      .catch((error) => {
+        alert(error.message);
+        console.log(error.message);
+      });
+  };
+  useEffect(() => {
+    getName();
+  }, []);
 
   const exit = () => {
     signOut(auth)
@@ -45,22 +61,8 @@ const Profile = () => {
       });
   };
 
-  const getName = () => {
-    getDoc(doc(db, "users", user?.uid))
-      .then((response) => {
-        const result = response.get("name");
-        setName(result);
-      })
-      .catch((error) => {
-        alert(error.message);
-        console.log(error.message);
-      });
-  };
-  useEffect(() => {
-    getName();
-  }, []);
-
   return (
+    
     <View style={styles.viewContainer}>
       <View style={styles.coverPhoto}>
         <ImageBackground
@@ -85,7 +87,7 @@ const Profile = () => {
           <View style={styles.seperatorTop}></View>
           <View style={styles.seperator}>
             <View style={styles.button}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate("MyStats")} >
                 <View style={styles.layoutRowNew}>
                   <MaterialCommunityIcons
                     name="chart-donut"
@@ -104,7 +106,7 @@ const Profile = () => {
           </View>
           <View style={styles.seperator}>
             <View style={styles.button}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate("History")} >
                 <View style={styles.layoutRowNew}>
                   <MaterialCommunityIcons
                     name="history"
@@ -123,14 +125,14 @@ const Profile = () => {
           </View>
           <View style={styles.seperator}>
             <View style={styles.button}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate("PrivacyPolicy")} >
                 <View style={styles.layoutRowNew}>
                   <MaterialCommunityIcons
                     name="home-account"
                     color="#FFF"
                     size="40"
                   />
-                  <Text style={styles.textStyle}>Account Settings</Text>
+                  <Text style={styles.textStyle}>Privacy Policy</Text>
                   <MaterialCommunityIcons
                     name="menu-right"
                     color="#FFF"

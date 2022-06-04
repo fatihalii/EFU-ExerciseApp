@@ -6,7 +6,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Navbar from "./components/screens/App/Navbar";
 import Home from "./components/screens/Login/Home";
 import Register from "./components/screens/Login/Register";
-import Routine from "./components/screens/App/Routine";
+import Mystats from "./components/screens/App/Profile/Mystats";
+import History from "./components/screens/App/Profile/History";
+import PrivacyPolicy from "./components/screens/App/Profile/PrivacyPolicy";
+
+
 import Colors from "./constants/Colors";
 
 
@@ -28,6 +32,20 @@ export default function App() {
           title:'',
           }
           }  />
+          <Stack.Screen name="MyStats" component={Mystats} options={{headerStyle:{
+            backgroundColor:Colors.primary200
+          },
+          title:'My Stats',
+          headerTintColor:Colors.secondary100 }} />
+          <Stack.Screen name="History" component={History} />
+          <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy}options={{headerStyle:{
+            backgroundColor:Colors.primary200
+          },
+          headerTintColor:Colors.secondary100,
+          title:'Privacy Policy'
+          
+          }} />
+
           
         </Stack.Navigator>
       </NavigationContainer>

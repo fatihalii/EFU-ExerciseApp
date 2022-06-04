@@ -1,7 +1,6 @@
 import {
   Text,
   StyleSheet,
-  Pressable,
   View,
   TextInput,
   TouchableOpacity,
@@ -40,7 +39,7 @@ const Register = () => {
         const user = response.user;
         try{
           const docRef =setDoc(doc(db,'users',user.uid),userCredentials);
-          console.log("success")
+          console.log("Success")
           navigation.navigate("AppPage");
         }catch(error){
           alert(error.message);
@@ -76,9 +75,9 @@ const userMaker= async (identity)=>{
           placeholderTextColor={Colors.secondary100}
           textAlign={"center"}
           autoCorrect="false"
-          value={userCredentials.Name}
+          defaultValue={userCredentials.Name}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,name:text})
+            setUserCredentials({...userCredentials,Name:text})
           }}
         />
         <TextInput
@@ -134,7 +133,7 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.Height}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,height:text})
+            setUserCredentials({...userCredentials,Height:text})
           }}
           keyboardType="numeric"
         />
@@ -145,7 +144,7 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.Weight}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,weight:text})
+            setUserCredentials({...userCredentials,Weight:text})
           }}
           keyboardType="numeric"
         />
@@ -156,15 +155,15 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.Gender}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,gender:text})
+            setUserCredentials({...userCredentials,Gender:text})
           }}
 
         />
       </View>
 
-      <Pressable style={styles.button} onPress={() => createUser()}>
+      <TouchableOpacity style={styles.button} onPress={() => createUser()}>
         <Text style={styles.buttonText}>Register</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
