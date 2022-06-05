@@ -9,9 +9,9 @@ import { useState } from "react";
 import Colors from "../../../constants/Colors";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, setDoc, doc } from 'firebase/firestore';
+import { collection, setDoc, doc } from "firebase/firestore";
 //import { getFirestore, setDoc, doc } from "firebase/firestore";
-import { auth,db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { useNavigation } from "@react-navigation/native";
 import { async } from "@firebase/util";
 
@@ -31,39 +31,45 @@ const Register = () => {
     Gender: "",
   });
 
+  const userProgram = {
+    
+    FullBodyGym: false,
+    FullBodyHome: false,
+
+    ArmGym: false,
+    ArmHome: false,
+
+    LegsGym: false,
+    LegsHome: false,
+
+    TricepsGym: false,
+    TricepsHome: false,
+  };
   const navigation = useNavigation();
 
-  const createUser =  () => {
+  const createUser = () => {
     createUserWithEmailAndPassword(auth, email, pw)
       .then((response) => {
         const user = response.user;
-        try{
-          const docRef =setDoc(doc(db,'users',user.uid),userCredentials);
-          console.log("Success")
+        try {
+          const docRef = setDoc(doc(db, "users", user.uid), userCredentials);
+          const programDoc = setDoc(
+            doc(db, "userPrograms", user.uid),
+            userProgram
+          );
+          console.log("Success");
           navigation.navigate("AppPage");
-        }catch(error){
+        } catch (error) {
           alert(error.message);
           console.log(error.message);
         }
-        
-       
       })
       .catch((error) => {
         alert(error.message);
-        console.log(error.message)
+        console.log(error.message);
         console.log(error);
       });
   };
-
-const userMaker= async (identity)=>{
-  try{
-    const docRef = await setDoc(doc(db,'users',identity),pw);
-  }catch(error){
-    alert(error.message);
-    console.log(error.message);
-  }
-
-}
 
   return (
     <View style={styles.pageContainer}>
@@ -77,7 +83,7 @@ const userMaker= async (identity)=>{
           autoCorrect="false"
           defaultValue={userCredentials.Name}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,Name:text})
+            setUserCredentials({ ...userCredentials, Name: text });
           }}
         />
         <TextInput
@@ -88,7 +94,7 @@ const userMaker= async (identity)=>{
           placeholderTextColor={Colors.secondary100}
           Value={email}
           onChangeText={(text) => {
-            setEmail(text)
+            setEmail(text);
           }}
           textAlign={"center"}
           keyboardType="email-address"
@@ -101,12 +107,12 @@ const userMaker= async (identity)=>{
           placeholderTextColor={Colors.secondary100}
           Value={pw}
           onChangeText={(text) => {
-            setPw(text)
+            setPw(text);
           }}
           textAlign={"center"}
           secureTextEntry="true"
         />
-       
+
         <TextInput
           style={styles.nameInput}
           placeholder="Confirm Password"
@@ -123,7 +129,7 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.BirthOfDate}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,BirthOfDate:text})
+            setUserCredentials({ ...userCredentials, BirthOfDate: text });
           }}
         />
         <TextInput
@@ -133,7 +139,7 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.Height}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,Height:text})
+            setUserCredentials({ ...userCredentials, Height: text });
           }}
           keyboardType="numeric"
         />
@@ -144,7 +150,7 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.Weight}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,Weight:text})
+            setUserCredentials({ ...userCredentials, Weight: text });
           }}
           keyboardType="numeric"
         />
@@ -155,9 +161,8 @@ const userMaker= async (identity)=>{
           textAlign={"center"}
           value={userCredentials.Gender}
           onChangeText={(text) => {
-            setUserCredentials({...userCredentials,Gender:text})
+            setUserCredentials({ ...userCredentials, Gender: text });
           }}
-
         />
       </View>
 

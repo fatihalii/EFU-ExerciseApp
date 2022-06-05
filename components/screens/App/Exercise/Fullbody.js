@@ -1,10 +1,20 @@
-import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { useState } from "react";
 
-import Colors from "../../../../constants/Colors.js";
+import Colors from "../../../../constants/Colors";
 
+import { db, auth } from "../../../firebase.js";
+import { updateDoc, doc } from "firebase/firestore";
 
 const Fullbody = () => {
+  const userId = auth.currentUser.uid;
   const [isPressed, setIsPressed] = useState({
     house: false,
     gym: false,
@@ -17,9 +27,22 @@ const Fullbody = () => {
     setIsPressed({ house: false, gym: true });
   };
 
+  const addExercise = () => {
+    try {
+      updateDoc(
+        doc(db, "userPrograms", userId),
+        isPressed.gym === true ? { FullBodyHouse: true } : { FullBodyGym: true }
+      );
+      alert("successfully added");
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
+
   return (
     <View style={styles.viewContainer}>
-      <Text style={styles.headerText} >Choose Programme Place</Text>
+      <Text style={styles.headerText}>Choose Programme Place</Text>
       <View style={styles.buttonsContainer}>
         <Pressable
           onPress={() => housePressed()}
@@ -37,8 +60,11 @@ const Fullbody = () => {
         <Pressable
           style={
             isPressed.gym === true
-              ? [styles.placeBox, { borderColor: "#000000", borderWidth: 2, marginRight: "5%" }]
-              : [styles.placeBox,{marginRight: "5%"}]
+              ? [
+                  styles.placeBox,
+                  { borderColor: "#000000", borderWidth: 2, marginRight: "5%" },
+                ]
+              : [styles.placeBox, { marginRight: "5%" }]
           }
           onPress={() => gymPressed()}
         >
@@ -48,11 +74,17 @@ const Fullbody = () => {
           />
         </Pressable>
       </View>
-          <Text style={styles.programText} > Program Type: Full Body</Text>
-      <TouchableOpacity style={styles.addButton} > 
-        <Text style={styles.buttonText} > Add To My Programs </Text>
+      <Text style={styles.programText}> Program Type: Full Body</Text>
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() =>
+          isPressed.gym === false && isPressed.house === false
+            ? alert("Please Choose a Programme Place")
+            : addExercise()
+        }
+      >
+        <Text style={styles.buttonText}> Add To My Programs </Text>
       </TouchableOpacity>
-
     </View>
   );
 };
@@ -66,10 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: Colors.primary200,
   },
-  headerText:{
-    fontSize:30,
-    color:Colors.secondary100,
-
+  headerText: {
+    fontSize: 30,
+    color: Colors.secondary100,
   },
   buttonsContainer: {
     justifyContent: "center",
@@ -77,8 +108,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: "30%",
     width: "80%",
-    marginTop:'15%',
-    borderWidth: 1,
+    marginTop: "15%",
+    borderWidth: 2,
     borderRadius: 20,
     borderColor: Colors.secondary200,
   },
@@ -96,22 +127,22 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
-  programText:{
-    marginTop:'25%',
-    fontSize:20,
-    color:Colors.secondary100,
+  programText: {
+    marginTop: "25%",
+    fontSize: 20,
+    color: Colors.secondary100,
   },
-  addButton:{
-    alignItems:"center",
-    justifyContent:'center',
-    width:'78%',
-    height:45,
-    borderRadius:15,
-    backgroundColor:Colors.secondary100,
-    marginTop:'15%'
+  addButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "78%",
+    height: 45,
+    borderRadius: 15,
+    backgroundColor: Colors.secondary100,
+    marginTop: "15%",
   },
   buttonText: {
-    color:Colors.primary100,
-    fontSize:15
-  }
+    color: Colors.primary100,
+    fontSize: 15,
+  },
 });
