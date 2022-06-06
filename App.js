@@ -18,12 +18,11 @@ import Triceps from './components/screens/App/Exercise/Triceps';
 import Colors from "./constants/Colors";
 
 
-
 export default function App() {
   const Stack = createNativeStackNavigator();
-
   return (
     <>
+    
       <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator>

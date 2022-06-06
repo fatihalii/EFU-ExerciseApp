@@ -4,11 +4,11 @@
     "slug": "workout-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/EFU-Login.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#06223d"
+      "backgroundColor": "#295acc"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

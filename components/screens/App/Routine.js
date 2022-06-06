@@ -9,8 +9,9 @@ const Routine = () => {
   const user = auth.currentUser;
     return (
       <View style={styles.viewContainer}>
-        <Text>Routine PAGE</Text>
-        <Text>{user?.email}</Text>
+        <View>
+          
+        </View>
       </View>
   
     );
