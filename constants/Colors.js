@@ -1,6 +1,7 @@
 const Colors = {
-    primary100:'#295acc',
-    primary200:'#295acc',
+    primary100:'#18367a',
+    primary200:'#18367a',
+    primary300:'#102451',
     secondary100:'#FFFFFF',
     secondary200:'#bcc4d1'
 };
