@@ -13,7 +13,10 @@ import Colors from "../../../constants/Colors";
 import { db, auth } from "../../../db/firebase";
 import { updateDoc, doc } from "firebase/firestore";
 
+import { useNavigation } from "@react-navigation/native";
 const Fullbody = () => {
+  const navigation = useNavigation();
+
   const userId = auth.currentUser.uid;
   const [isPressed, setIsPressed] = useState({
     house: false,
@@ -31,9 +34,10 @@ const Fullbody = () => {
     try {
       updateDoc(
         doc(db, "userPrograms", userId),
-        isPressed.gym === true ? { FullBodyHouse: true } : { FullBodyGym: true }
+        isPressed.house === true ? { FullBodyHouse: true } : { FullBodyGym: true }
       );
-      alert("successfully added");
+      alert("Program Successfully Added");
+      navigation.goBack();
     } catch (error) {
       console.log(error);
       alert(error.message);

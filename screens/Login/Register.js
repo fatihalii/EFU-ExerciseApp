@@ -33,16 +33,16 @@ const Register = () => {
   const userProgram = {
     
     FullBodyGym: false,
-    FullBodyHome: false,
+    FullBodyHouse: false,
 
     ArmGym: false,
-    ArmHome: false,
+    ArmHouse: false,
 
     LegsGym: false,
-    LegsHome: false,
+    LegsHouse: false,
 
     TricepsGym: false,
-    TricepsHome: false,
+    TricepsHouse: false,
   };
   const navigation = useNavigation();
 

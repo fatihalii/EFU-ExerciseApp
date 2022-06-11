@@ -13,7 +13,12 @@ import Colors from "../../../constants/Colors";
 import { db, auth } from "../../../db/firebase";
 import { updateDoc, doc } from "firebase/firestore";
 
+import { useNavigation } from "@react-navigation/native";
+
+
 const Triceps = () => {
+  const navigation = useNavigation();
+
   const userId = auth.currentUser.uid;
   const [isPressed, setIsPressed] = useState({
     house: false,
@@ -31,9 +36,10 @@ const Triceps = () => {
     try {
       updateDoc(
         doc(db, "userPrograms", userId),
-        isPressed.gym === true ? { TricepsHouse: true } : { TricepsGym: true }
+        isPressed.house === true ? { TricepsHouse: true } : { TricepsGym: true }
       );
-      alert("successfully added");
+      alert("Program Successfully Added");
+      navigation.goBack();
     } catch (error) {
       console.log(error);
       alert(error.message);

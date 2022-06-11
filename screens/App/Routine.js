@@ -1,13 +1,27 @@
-import { View, StyleSheet, SafeAreaView, ScrollView, Text } from "react-native";
+import { View, StyleSheet, SafeAreaView, ScrollView, Text, RefreshControl } from "react-native";
 import Colors from "../../constants/Colors";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { auth, db } from "../../db/firebase";
 import { getDoc, doc } from "firebase/firestore";
 import ExerciseProgramButton from "../../components/ExerciseProgramButton";
 
+
+
 const Routine = () => {
   const user = auth.currentUser;
+
   const [programs, setPrograms] = useState({});
+  const [refreshing, setRefreshing] =useState(false);
+
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+    getPrograms();
+  }, []);
 
   const getPrograms = () => {
     getDoc(doc(db, "userPrograms", user?.uid))
@@ -27,6 +41,11 @@ const Routine = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
+      
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
         <View style={styles.viewContainer}>
           {programs.ArmGym === true ? (
         <ExerciseProgramButton Type={"ARM"} Place={"GYM"} Nav={'ArmGym'} />
