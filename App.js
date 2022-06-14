@@ -22,7 +22,6 @@ import LegsHouse from "./screens/App/Routine/LegsHouse";
 import TricepsGym from "./screens/App/Routine/TricepsGym";
 import TricepsHouse from "./screens/App/Routine/TricepsHouse";
 
-
 import Colors from "./constants/Colors";
 
 
